@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- mybatis的配置文件用的跟标签 -->
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    <typeAliases>
+        <!-- 给类 取別名 -->
+        <!-- <typeAlias type="com.edu.bean.Students" alias="Students"/> -->
+        <!--
+            採用掃描的方式給com.edu.bean下面所有的類都去了別名，
+            默認別名為類的名稱或者類的首字母小寫
+            當前的別名就是: Students 或者students
+         -->
+        <package name="com.edu.bean"/>
+    </typeAliases>
+
+    <!-- 引入 pageHelper插件 -->
+    <!--注意这里要写成PageInterceptor, 5.0之前的版本都是写PageHelper, 5.0之后要换成PageInterceptor-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <!-- reasonable：分页合理化参数，默认值为false,直接根据参数进行查询。
+              当该参数设置为 true 时，pageNum<=0 时会查询第一页， pageNum>pages（超过总数时），会查询最后一页。 -->
+            <property name="PageHelper" value="mysql"/>
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+
+</configuration>
